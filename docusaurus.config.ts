@@ -5,8 +5,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Opscape Developer Documentation',
-  tagline: 'Learn more about the gears powering Opscape solutions',
+  title: 'Hana Developer Documentation',
+  tagline: 'Learn about the Hana DevOps ecosystem',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -15,14 +15,14 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://docs.opscape.app',
+  url: 'https://docs.hanassh.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'opscape-hq', // Usually your GitHub org/user name.
+  organizationName: 'hana-ssh', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
   deploymentBranch: 'gh-pages',
   trailingSlash: true,
@@ -77,9 +77,9 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Opscape Docs',
+      title: 'Hana Docs',
       logo: {
-        alt: 'Opscape Logo',
+        alt: 'Hana Logo',
         src: 'img/logo-alpha-white.png',
       },
       items: [
@@ -91,7 +91,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/opscape-hq',
+          href: 'https://github.com/hana-ssh',
           label: 'GitHub',
           position: 'right',
         },
@@ -140,7 +140,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Opscape. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Hana. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
