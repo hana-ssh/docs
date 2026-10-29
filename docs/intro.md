@@ -1,47 +1,27 @@
 ---
 sidebar_position: 1
+title: Introduction
+description: What Hana is and how Hana Desktop, the agent and Hana Cloud fit together.
 ---
 
-# Tutorial Intro
+# Introduction
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Hana is an SSH client with a built-in AI agent for macOS, Windows and Linux. Terminal, SFTP, port forwarding and host insights live in one native app. It is free to use and needs no account.
 
-## Getting Started
+## The pieces
 
-Get started by **creating a new site**.
+| | What it is | Account needed |
+| --- | --- | --- |
+| [Hana Desktop](./desktop/index.md) | The app. Hosts, keys and history are kept in local vaults on your machine. | No |
+| [Agent](./agent/index.md) | Runs commands in the session you pick, reads the output and keeps going until the task is done. | No |
+| [Hana Cloud](./cloud/index.md) | Optional end-to-end encrypted vault sync, shared vaults and shared sessions. | Yes |
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## Get Hana
 
-### What you'll need
+Download Hana Desktop for your platform from [hanassh.com/download](https://hanassh.com/download).
 
-- [Node.js](https://nodejs.org/en/download/) version 20.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+:::tip[Free and Pro]
 
-## Generate a new site
+Every feature of Hana Desktop is free. Pro raises the cloud vault limit and lets you host shared sessions. See [pricing](https://hanassh.com/#pricing).
 
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+:::

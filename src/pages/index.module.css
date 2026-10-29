@@ -1,23 +1,255 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
+/* Homepage, modelled on the hero and feature cards on hanassh.com */
 
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
+.hero {
   position: relative;
   overflow: hidden;
+  padding: 7rem 1.5rem 3.5rem;
+  text-align: center;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
+.heroGlow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 900px 520px at 50% -60px, var(--hana-glow), transparent 70%);
+}
+
+.heroInner {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.heroTitle {
+  margin: 1.25rem auto 0;
+  max-width: 16ch;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+}
+
+.accent {
+  color: var(--hana-accent);
+}
+
+.heroLead {
+  margin: 1.5rem auto 0;
+  max-width: 54ch;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--hana-fg-2);
+}
+
+.heroActions {
+  margin-top: 2.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.buttonPrimary,
+.buttonSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  transition:
+    background-color 150ms,
+    color 150ms;
+}
+
+.buttonPrimary {
+  color: #fff;
+  background-color: var(--hana-accent);
+}
+
+.buttonPrimary:hover {
+  color: #fff;
+  background-color: var(--hana-accent-hover);
+}
+
+.buttonSecondary {
+  color: var(--hana-fg);
+  background-color: var(--hana-bg-1);
+  border: 1px solid var(--hana-line-2);
+}
+
+.buttonSecondary:hover {
+  color: var(--hana-fg);
+  background-color: var(--hana-bg-2);
+}
+
+.main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 1.5rem 6rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 996px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-.buttons {
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero {
+    padding-top: 4.5rem;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid var(--hana-line);
+  border-radius: var(--hana-radius-lg);
+  background-color: var(--hana-bg-1);
+  color: var(--hana-fg);
+  transition:
+    border-color 150ms,
+    background-color 150ms;
+}
+
+.card:hover {
+  color: var(--hana-fg);
+  border-color: var(--hana-line-2);
+  background-color: var(--hana-bg-2);
+}
+
+.cardIcon {
+  color: var(--hana-accent-text);
+}
+
+[data-theme='dark'] .cardIcon {
+  color: #c8cff8;
+}
+
+.cardTitle {
+  margin: 1rem 0 0;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.cardDescription {
+  margin: 0.4rem 0 1.25rem;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--hana-fg-2);
+}
+
+.cardMore {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--hana-fg-3);
+  transition:
+    color 150ms,
+    gap 150ms;
+}
+
+.card:hover .cardMore {
+  gap: 0.55rem;
+  color: var(--hana-accent-text);
+}
+
+.links {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid var(--hana-line);
+  border-radius: var(--hana-radius-lg);
+  overflow: hidden;
+}
+
+@media (max-width: 996px) {
+  .links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.link {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.9rem 1.25rem;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--hana-fg-2);
+  box-shadow: 1px 0 0 var(--hana-line);
+  transition:
+    color 150ms,
+    background-color 150ms;
+}
+
+.link:hover {
+  color: var(--hana-fg);
+  background-color: var(--hana-bg-1);
+}
+
+.link svg {
+  color: var(--hana-fg-3);
+}
+
+.preview {
+  position: relative;
+  margin-top: 4.5rem;
+}
+
+.previewGlow {
+  position: absolute;
+  inset: 2.5rem 2.5rem 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 40%, rgba(47, 90, 240, 0.28), transparent 65%);
+  filter: blur(64px);
+}
+
+.previewFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.711;
+  overflow: hidden;
+  border: 1px solid var(--hana-line-2);
+  border-radius: 1.6% / 2.75%;
+  background-color: #000;
+  box-shadow:
+    0 40px 120px -40px rgba(47, 90, 240, 0.45),
+    0 24px 60px -30px rgba(0, 0, 0, 0.8);
+}
+
+.previewImage {
+  position: absolute;
+  max-width: none;
+  width: 111.36%;
+  height: 119.19%;
+  left: -5.68%;
+  top: -6.56%;
+  user-select: none;
+}
+
+.previewFade {
+  position: absolute;
+  inset: auto 0 0;
+  height: 10rem;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--hana-bg-0));
 }

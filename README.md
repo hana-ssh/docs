@@ -1,41 +1,29 @@
-# Website
+# Hana Docs
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+Source for [docs.hanassh.com](https://docs.hanassh.com), built with [Docusaurus](https://docusaurus.io/).
 
-## Installation
-
-```bash
-yarn
-```
-
-## Local Development
+## Development
 
 ```bash
-yarn start
+pnpm install
+pnpm start
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+Pages live in `docs/`. The sidebar is generated from the folder structure; order pages with `sidebar_position` in front matter and folders with `_category_.json`.
+
+The theme lives in `src/css/custom.css`. Its tokens mirror `packages/web/src/app/globals.css` in hana-cloud, so keep the two in step.
 
 ## Build
 
 ```bash
-yarn build
+pnpm build
+pnpm serve
 ```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
 ## Deployment
 
-Using SSH:
-
 ```bash
-USE_SSH=true yarn deploy
+GIT_USER=<Your GitHub username> pnpm deploy
 ```
 
-Not using SSH:
-
-```bash
-GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+This builds the site and pushes it to the `gh-pages` branch.

@@ -4,38 +4,49 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+const SITE_URL = 'https://hanassh.com';
+
 const config: Config = {
-  title: 'Hana Developer Documentation',
-  tagline: 'Learn about the Hana DevOps ecosystem',
+  title: 'Hana Docs',
+  tagline: 'Guides and reference for Hana Desktop, the Hana agent and Hana Cloud.',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    faster: true, // Rspack, SWC and Lightning CSS via @docusaurus/faster
   },
 
-  // Set the production url of your site here
   url: 'https://docs.hanassh.com',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'hana-ssh', // Usually your GitHub org/user name.
-  projectName: 'docs', // Usually your repo name.
+  organizationName: 'hana-ssh',
+  projectName: 'docs',
   deploymentBranch: 'gh-pages',
   trailingSlash: true,
 
   onBrokenLinks: 'throw',
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
   },
+
+  // Same typefaces as hanassh.com
+  stylesheets: [
+    {
+      href: 'https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Public+Sans:ital,wght@0,300..800;1,300..800&display=swap',
+      type: 'text/css',
+    },
+  ],
+  headTags: [
+    {tagName: 'link', attributes: {rel: 'preconnect', href: 'https://fonts.googleapis.com'}},
+    {
+      tagName: 'link',
+      attributes: {rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous'},
+    },
+  ],
 
   presets: [
     [
@@ -43,26 +54,10 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl: 'https://github.com/hana-ssh/docs/tree/main/',
+          showLastUpdateTime: true,
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -71,80 +66,89 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
     colorMode: {
-      respectPrefersColorScheme: true,
+      defaultMode: 'dark',
+      respectPrefersColorScheme: false,
+    },
+    docs: {
+      sidebar: {
+        hideable: true,
+        autoCollapseCategories: true,
+      },
     },
     navbar: {
-      title: 'Hana Docs',
+      title: 'Hana',
       logo: {
-        alt: 'Hana Logo',
-        src: 'img/logo-alpha-white.png',
+        alt: 'Hana',
+        src: 'img/logo.svg',
+        srcDark: 'img/logo-dark.svg',
+        width: 18,
+        height: 18,
       },
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'docsSidebar',
           position: 'left',
-          label: 'Tutorial',
+          label: 'Docs',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        {href: `${SITE_URL}/download`, label: 'Download', position: 'left'},
+        {href: 'https://marketplace.hanassh.com/', label: 'Themes', position: 'left'},
         {
           href: 'https://github.com/hana-ssh',
-          label: 'GitHub',
           position: 'right',
+          className: 'navbar-github',
+          'aria-label': 'GitHub',
+        },
+        {
+          href: `${SITE_URL}/login`,
+          label: 'Get started',
+          position: 'right',
+          className: 'navbar-cta',
         },
       ],
     },
     footer: {
-      style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'Product',
           items: [
-            {
-              label: 'Tutorial',
-              to: '/docs/intro',
-            },
+            {label: 'Hana Desktop', href: `${SITE_URL}/#desktop`},
+            {label: 'Hana Cloud', href: `${SITE_URL}/#cloud`},
+            {label: 'Pricing', href: `${SITE_URL}/#pricing`},
+            {label: 'Download', href: `${SITE_URL}/download`},
           ],
         },
         {
-          title: 'Community',
+          title: 'Resources',
           items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
-            },
+            {label: 'Documentation', to: '/docs/intro'},
+            {label: 'Theme marketplace', href: 'https://marketplace.hanassh.com/'},
+            {label: 'Service status', href: 'https://status.seventy7.dev/'},
+            {label: 'GitHub', href: 'https://github.com/hana-ssh'},
           ],
         },
         {
-          title: 'More',
+          title: 'Account',
           items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
-            },
+            {label: 'Sign in', href: `${SITE_URL}/login`},
+            {label: 'Your account', href: `${SITE_URL}/account`},
+            {label: 'Plans & billing', href: `${SITE_URL}/account/plans`},
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Hana. Built with Docusaurus.`,
+      copyright: `© ${new Date().getFullYear()} seventy7 sp. z o.o. All rights reserved.`,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: {
+        ...prismThemes.oneLight,
+        plain: {...prismThemes.oneLight.plain, backgroundColor: '#fafafa'},
+      },
+      darkTheme: {
+        ...prismThemes.oneDark,
+        plain: {...prismThemes.oneDark.plain, backgroundColor: '#101010'},
+      },
+      additionalLanguages: ['bash', 'json', 'yaml', 'toml', 'ini'],
     },
   } satisfies Preset.ThemeConfig,
 };

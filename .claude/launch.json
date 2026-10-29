@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "docs",
+      "runtimeExecutable": "/bin/zsh",
+      "runtimeArgs": [
+        "-c",
+        "export PATH=$HOME/.local/share/fnm/aliases/default/bin:$HOME/Library/pnpm/bin:$PATH && pnpm start --port 3200 --no-open"
+      ],
+      "port": 3200
+    }
+  ]
+}
