@@ -1,0 +1,142 @@
+---
+sidebar_position: 1
+title: Install
+description: Install, update and uninstall hanad on Linux, macOS and Windows.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Install hanad
+
+<Tabs groupId="os">
+<TabItem value="unix" label="Linux and macOS" default>
+
+```sh
+curl -fsSL https://hanassh.com/i/hanad | sh
+```
+
+The installer:
+
+1. Picks the build for your OS and CPU and downloads it from the latest [GitLab Release](https://gitlab.com/hanassh/hanad/-/releases).
+2. Checks its SHA-256 against the release's `SHA256SUMS` and stops on a mismatch.
+3. Installs it to `/usr/local/bin/hanad`, using `sudo` when you aren't root. Without `sudo` it installs to `~/.local/bin/hanad` instead.
+4. Asks whether to send [anonymous usage statistics](./security.md#telemetry) (default: yes).
+
+It works with `curl` or `wget`, and `sha256sum` or `shasum`.
+
+</TabItem>
+<TabItem value="windows" label="Windows">
+
+In an **elevated** (Run as administrator) PowerShell:
+
+```powershell
+irm https://hanassh.com/i/hanad | iex
+```
+
+The installer downloads `hanad-windows-x86_64.exe` from the latest [GitLab Release](https://gitlab.com/hanassh/hanad/-/releases), checks its SHA-256, installs it to `C:\Program Files\hanad\hanad.exe`, adds that folder to the system `PATH` and asks about [anonymous usage statistics](./security.md#telemetry) (default: yes). Open a new terminal afterwards so the new `PATH` applies.
+
+</TabItem>
+</Tabs>
+
+Then [log in](./connect.md#log-in):
+
+```sh
+sudo hanad login
+```
+
+## Read the script first
+
+`hanassh.com/i/hanad` serves the `install.sh` (or, to PowerShell, the `install.ps1`) of the latest hanad release. Open it in a browser to read it, or download it and run it yourself:
+
+```sh
+curl -fsSL https://hanassh.com/i/hanad -o install.sh
+less install.sh
+sh install.sh
+```
+
+| URL | Serves |
+| --- | --- |
+| [`hanassh.com/i/hanad`](https://hanassh.com/i/hanad) | `install.ps1` to PowerShell, `install.sh` to everything else |
+| [`hanassh.com/i/hanad.sh`](https://hanassh.com/i/hanad.sh) | always `install.sh` |
+| [`hanassh.com/i/hanad.ps1`](https://hanassh.com/i/hanad.ps1) | always `install.ps1` |
+
+## Installer options
+
+Set these environment variables to change what the installer does.
+
+| Variable | Default | |
+| --- | --- | --- |
+| `HANAD_VERSION` | latest | Install a specific version, e.g. `0.2.0` |
+| `HANAD_TELEMETRY` | ask | `1` or `0`: answer the usage statistics question without a prompt |
+| `HANAD_INSTALL_DIR` | `/usr/local/bin` | Where to put the binary (Linux and macOS). Setting it skips `sudo`. |
+
+With `curl | sh` the variables go on the `sh` side of the pipe:
+
+<Tabs groupId="os">
+<TabItem value="unix" label="Linux and macOS" default>
+
+```sh
+# Pin a version and skip the question (e.g. in cloud-init or Ansible)
+curl -fsSL https://hanassh.com/i/hanad | HANAD_VERSION=0.2.0 HANAD_TELEMETRY=0 sh
+
+# Install for the current user only, without sudo
+curl -fsSL https://hanassh.com/i/hanad | HANAD_INSTALL_DIR="$HOME/.local/bin" sh
+```
+
+</TabItem>
+<TabItem value="windows" label="Windows">
+
+```powershell
+$env:HANAD_VERSION = "0.2.0"; $env:HANAD_TELEMETRY = "0"
+irm https://hanassh.com/i/hanad | iex
+```
+
+</TabItem>
+</Tabs>
+
+## Install manually
+
+Every [release](https://gitlab.com/hanassh/hanad/-/releases) has one binary per platform, plus `SHA256SUMS`:
+
+| Asset | Platform |
+| --- | --- |
+| `hanad-linux-x86_64` | Linux x86_64 (static, any distribution) |
+| `hanad-linux-aarch64` | Linux ARM64 (static, any distribution) |
+| `hanad-macos-x86_64` | macOS on Intel |
+| `hanad-macos-aarch64` | macOS on Apple silicon |
+| `hanad-windows-x86_64.exe` | Windows x86_64 |
+
+The latest release's assets are always at `https://gitlab.com/hanassh/hanad/-/releases/permalink/latest/downloads/<asset>`:
+
+```sh
+base=https://gitlab.com/hanassh/hanad/-/releases/permalink/latest/downloads
+curl -fsSLO "$base/hanad-linux-x86_64"
+curl -fsSLO "$base/SHA256SUMS"
+sha256sum --check --ignore-missing SHA256SUMS
+sudo install -m 755 hanad-linux-x86_64 /usr/local/bin/hanad
+```
+
+## Update
+
+```sh
+sudo hanad update          # download, verify and install the latest release, then restart the service
+sudo hanad update --check  # only report whether a newer version exists
+```
+
+Running the installer again also upgrades hanad and restarts a running service. To have hanad update itself, turn on `auto_update` (checked once a day; not available on Windows):
+
+```sh
+sudo hanad config set auto_update true
+sudo hanad restart
+```
+
+## Uninstall
+
+```sh
+sudo hanad uninstall          # remove this machine from Hana, stop and remove the service
+sudo hanad uninstall --purge  # also delete the config, state and logs
+sudo rm /usr/local/bin/hanad
+```
+
+`hanad uninstall` prints where the binary is so you can delete it. On Windows, delete `C:\Program Files\hanad` and remove it from the system `PATH`.

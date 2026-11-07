@@ -15,6 +15,10 @@ Hosts, keys, snippets and port forwarding presets follow you to every device, al
 
 Invite people by email as editors or viewers, and check each member's key fingerprint before you share. Owners can transfer a vault or remove members at any time.
 
+## Port-less SSH with hanad
+
+Install [hanad](../hanad/index.md) on a server and it keeps an outbound connection to Hana Cloud, so you can SSH into it from Hana Desktop without opening any inbound port. SSH stays end-to-end between Hana Desktop and the server. Share a hanad host with your team by adding it to a shared vault.
+
 ## Plans
 
 | | Free | Pro |
@@ -23,3 +27,4 @@ Invite people by email as editors or viewers, and check each member's key finger
 | Shared vaults | Yes | Yes |
 | Join shared sessions | Yes | Yes |
 | Host shared sessions | No | Up to 25 viewers |
+| Port-less SSH to [hanad](../hanad/index.md) hosts | No | Yes |

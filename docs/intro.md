@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: Introduction
-description: What Hana is and how Hana Desktop, the agent and Hana Cloud fit together.
+description: What Hana is and how Hana Desktop, the agent, Hana Cloud and hanad fit together.
 ---
 
 # Introduction
@@ -15,10 +15,17 @@ Hana is an SSH client with a built-in AI agent for macOS, Windows and Linux. Ter
 | [Hana Desktop](./desktop/index.md) | The app. Hosts, keys and history are kept in local vaults on your machine. | No |
 | [Agent](./agent/index.md) | Runs commands in the session you pick, reads the output and keeps going until the task is done. | No |
 | [Hana Cloud](./cloud/index.md) | Optional end-to-end encrypted vault sync, shared vaults and shared sessions. | Yes |
+| [hanad](./hanad/index.md) | A daemon for your servers: SSH into them through Hana Cloud without opening any inbound port. | Yes (Pro to connect) |
 
 ## Get Hana
 
 Download Hana Desktop for your platform from [hanassh.com/download](https://hanassh.com/download).
+
+To reach a server without opening a port, install [hanad](./hanad/index.md) on it:
+
+```sh
+curl -fsSL https://hanassh.com/i/hanad | sh
+```
 
 :::tip[Free and Pro]
 
