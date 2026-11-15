@@ -70,6 +70,16 @@ Telemetry:  on
 
 The service is managed by systemd or OpenRC on Linux, launchd on macOS and the Service Control Manager on Windows. It restarts automatically if hanad exits.
 
+## Running commands over a relayed session
+
+When you are connected to the machine through hanad itself (port-less SSH from Hana Desktop), hanad notices and asks before commands that would end that session:
+
+| Ends the session; you can reconnect once hanad is back | Ends the session; no way back in through Hana until hanad runs again |
+| --- | --- |
+| `restart`, `update`, `telemetry on`/`off` | `stop`, `logout`, `uninstall`, `service uninstall`, `login --force` |
+
+Answer `y` to continue. Without a terminal to ask on (for example `ssh host 'sudo hanad stop'` in a script), the command is refused; pass `--yes` (or set `HANAD_YES=1`) to run it anyway. `hanad status` shows `This shell: relayed by hanad` when the current shell came in this way. Detection works under `sudo` too.
+
 ## `hanad update`
 
 ```text
