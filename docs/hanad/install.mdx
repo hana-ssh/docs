@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 <TabItem value="unix" label="Linux and macOS" default>
 
 ```sh
-curl -fsSL https://hanassh.com/i/hanad | sh
+curl -fsSL https://hanassh.com/hanad.sh | sh
 ```
 
 The installer:
@@ -31,7 +31,7 @@ It works with `curl` or `wget`, and `sha256sum` or `shasum`.
 In an **elevated** (Run as administrator) PowerShell:
 
 ```powershell
-irm https://hanassh.com/i/hanad | iex
+irm https://hanassh.com/hanad.ps1 | iex
 ```
 
 The installer downloads `hanad-windows-x86_64.exe` from the latest [GitLab Release](https://gitlab.com/hanassh/hanad/-/releases), checks its SHA-256, installs it to `C:\Program Files\hanad\hanad.exe`, adds that folder to the system `PATH` and asks about [anonymous usage statistics](./security.md#telemetry) (default: yes). Open a new terminal afterwards so the new `PATH` applies.
@@ -47,19 +47,18 @@ sudo hanad login
 
 ## Read the script first
 
-`hanassh.com/i/hanad` serves the `install.sh` (or, to PowerShell, the `install.ps1`) of the latest hanad release. Open it in a browser to read it, or download it and run it yourself:
+`hanassh.com/hanad.sh` and `hanassh.com/hanad.ps1` serve the `install.sh` and `install.ps1` of the latest hanad release. Open one in a browser to read it, or download it and run it yourself:
 
 ```sh
-curl -fsSL https://hanassh.com/i/hanad -o install.sh
+curl -fsSL https://hanassh.com/hanad.sh -o install.sh
 less install.sh
 sh install.sh
 ```
 
 | URL | Serves |
 | --- | --- |
-| [`hanassh.com/i/hanad`](https://hanassh.com/i/hanad) | `install.ps1` to PowerShell, `install.sh` to everything else |
-| [`hanassh.com/i/hanad.sh`](https://hanassh.com/i/hanad.sh) | always `install.sh` |
-| [`hanassh.com/i/hanad.ps1`](https://hanassh.com/i/hanad.ps1) | always `install.ps1` |
+| [`hanassh.com/hanad.sh`](https://hanassh.com/hanad.sh) | `install.sh` (Linux, macOS) |
+| [`hanassh.com/hanad.ps1`](https://hanassh.com/hanad.ps1) | `install.ps1` (Windows) |
 
 ## Installer options
 
@@ -78,10 +77,10 @@ With `curl | sh` the variables go on the `sh` side of the pipe:
 
 ```sh
 # Pin a version and skip the question (e.g. in cloud-init or Ansible)
-curl -fsSL https://hanassh.com/i/hanad | HANAD_VERSION=0.2.0 HANAD_TELEMETRY=0 sh
+curl -fsSL https://hanassh.com/hanad.sh | HANAD_VERSION=0.2.0 HANAD_TELEMETRY=0 sh
 
 # Install for the current user only, without sudo
-curl -fsSL https://hanassh.com/i/hanad | HANAD_INSTALL_DIR="$HOME/.local/bin" sh
+curl -fsSL https://hanassh.com/hanad.sh | HANAD_INSTALL_DIR="$HOME/.local/bin" sh
 ```
 
 </TabItem>
@@ -89,7 +88,7 @@ curl -fsSL https://hanassh.com/i/hanad | HANAD_INSTALL_DIR="$HOME/.local/bin" sh
 
 ```powershell
 $env:HANAD_VERSION = "0.2.0"; $env:HANAD_TELEMETRY = "0"
-irm https://hanassh.com/i/hanad | iex
+irm https://hanassh.com/hanad.ps1 | iex
 ```
 
 </TabItem>

@@ -8,7 +8,7 @@ description: The Hana daemon. Reach your servers over SSH without opening any in
 hanad is the Hana daemon. Install it on a server, log in once, and the server shows up in Hana Desktop. You can then SSH into it **without opening any inbound port**: no port forwarding on the router, no public IP, no bastion host.
 
 ```sh
-curl -fsSL https://hanassh.com/i/hanad | sh
+curl -fsSL https://hanassh.com/hanad.sh | sh
 sudo hanad login
 ```
 

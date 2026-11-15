@@ -24,7 +24,7 @@ Download Hana Desktop for your platform from [hanassh.com/download](https://hana
 To reach a server without opening a port, install [hanad](./hanad/index.md) on it:
 
 ```sh
-curl -fsSL https://hanassh.com/i/hanad | sh
+curl -fsSL https://hanassh.com/hanad.sh | sh
 ```
 
 :::tip[Free and Pro]
