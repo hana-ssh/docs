@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 title: Security and telemetry
 description: What hanad stores on the server, what Hana Cloud can see, and what anonymous usage statistics contain.
 ---

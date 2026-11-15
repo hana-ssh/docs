@@ -25,6 +25,7 @@ telemetry = true
 auto_update = false
 update_project = "hanassh/hanad"
 log_level = "info"
+alerts = true
 ```
 
 | Key | Default | |
@@ -34,6 +35,7 @@ log_level = "info"
 | `telemetry` | asked at install | [Anonymous usage statistics](./security.md#telemetry), `true` or `false`. Same as `hanad telemetry on`/`off`. |
 | `auto_update` | `false` | Check for a new release once a day and install it. Not available on Windows. |
 | `log_level` | `info` | `error`, `warn`, `info`, `debug` or `trace` |
+| `alerts` | `true` | Watch this server and send [host alerts](./alerts.md). Which alerts and their thresholds are set in Hana Desktop. |
 | `api_url` | `https://api.hanassh.com` | The Hana Cloud API. Only change it if you were told to. |
 | `update_project` | `hanassh/hanad` | GitLab project that `hanad update` reads releases from |
 
@@ -79,6 +81,8 @@ The state directory holds:
 | `credentials.json` | The host credential (readable only by its owner). See [Security](./security.md#what-the-server-stores). |
 | `status.json` | The daemon's current state, read by `hanad status` |
 | `telemetry.json` | Usage statistics waiting to be sent (only when telemetry is on) |
+| `alerts.json` | Host alerts that are currently firing |
+| `process-baseline.json` | Programs seen on this server, for unfamiliar-process alerts |
 
 ## The background service
 
